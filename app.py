@@ -48,7 +48,9 @@ if user_prompt:
         with st.spinner("Thinking..."):
             response = st.session_state.chat.send_message(user_prompt)
             assistant_reply = response.text
-            st.markdown(assistant_reply)
+            ar =list(assistant_reply)
+            for i,j in enumerate(assistant_reply):
+                st.markdown(''.join(ar[0:i]))
 
     st.session_state.messages.append(
         {"role": "assistant", "content": assistant_reply}
@@ -59,4 +61,5 @@ if st.sidebar.button("🔄 Reset Conversation"):
     st.session_state.chat = model.start_chat(history=[])
     st.session_state.messages = []
     st.experimental_rerun()
+
 
